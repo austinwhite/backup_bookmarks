@@ -1,0 +1,4 @@
+#!/bin/bash
+
+BOOKMARK_PATH = '~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks'
+
