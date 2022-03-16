@@ -1,4 +1,8 @@
 #!/bin/bash
 
-BOOKMARK_PATH = '~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks'
+BOOKMARK_FILE_PATH=~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks
+SUFFIX=`date '+%m%d%y_%M%S'`
+FILE_NAME="Bookmarks_${SUFFIX}.json"
+
+cp $BOOKMARK_FILE_PATH ./backups/$FILE_NAME 
 
