@@ -1,8 +1,40 @@
 #!/bin/bash
 
 BOOKMARK_FILE_PATH=~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks
-SUFFIX=`date '+%m%d%y_%M%S'`
-FILE_NAME="Bookmarks_${SUFFIX}.json"
+SUFFIX=`date +%m%d%y_%H%M%S`
+FILE_NAME=Bookmarks_${SUFFIX}.json
+RUN_TYPE=force
 
-cp $BOOKMARK_FILE_PATH ./backups/$FILE_NAME 
+copy_bookmarks() {
+    cp $BOOKMARK_FILE_PATH ./backups/$FILE_NAME 
+}
+
+check_mtime() {
+    echo "TODO: check if mtime of bookmarks in the last 24 hours"
+}
+
+usage() {
+    echo "usage: backup [run-type]"
+    echo "    run-type: force, day (default: force)"
+}
+
+if [ "$#" -gt 1 ]; then
+    echo "error: to many peremeters"
+    usage
+    exit 1
+fi
+
+if [ -n "$1" ]; then
+    RUN_TYPE=$1
+fi
+
+if [ $RUN_TYPE == "force" ]; then
+    copy_bookmarks
+elif [ $RUN_TYPE == "day" ]; then
+    check_mtime
+else
+    echo "error: invalid run-type: $RUN_TYPE"
+    usage
+    exit 1
+fi
 
