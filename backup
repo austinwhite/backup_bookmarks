@@ -1,16 +1,26 @@
 #!/bin/bash
 
-BOOKMARK_FILE_PATH=~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks
-SUFFIX=`date +%m%d%y_%H%M%S`
-FILE_NAME=Bookmarks_${SUFFIX}.json
-RUN_TYPE=force
+BOOKMARKS_PATH=~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks
+BACKUP_ROOT_PATH=./backups
+SECONDS_IN_A_DAY=86400
+
+suffix=`date +%m%d%y_%H%M%S`
+fileName=Bookmarks_${suffix}.json
+backupFilePath=$BACKUP_ROOT_PATH/$fileName
+runType=force
 
 copy_bookmarks() {
-    cp $BOOKMARK_FILE_PATH ./backups/$FILE_NAME 
+    cp $BOOKMARKS_PATH $backupFilePath
 }
 
 check_mtime() {
-    echo "TODO: check if mtime of bookmarks in the last 24 hours"
+    bookmarkTime=`stat -c %Y $BOOKMARKS_PATH`
+    currentTime=`date +%s`
+    timeDifference=`expr $currentTime - $bookmarkTime`
+ 
+    if [ $timeDifference -lt $SECONDS_IN_A_DAY ]; then
+        copy_bookmarks
+    fi
 }
 
 usage() {
@@ -25,15 +35,15 @@ if [ "$#" -gt 1 ]; then
 fi
 
 if [ -n "$1" ]; then
-    RUN_TYPE=$1
+    runType=$1
 fi
 
-if [ $RUN_TYPE == "force" ]; then
+if [ $runType == "force" ]; then
     copy_bookmarks
-elif [ $RUN_TYPE == "day" ]; then
+elif [ $runType == "day" ]; then
     check_mtime
 else
-    echo "error: invalid run-type: $RUN_TYPE"
+    echo "error: invalid run-type: $runType"
     usage
     exit 1
 fi
