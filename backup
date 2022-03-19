@@ -25,7 +25,7 @@ check_mtime() {
 }
 
 push_backup() {
-    commitMessage="Bookmarsk backup"
+    commitMessage="Bookmarks backup"
 
     git add $backupFilePath
     git commit -m $commitMessage
