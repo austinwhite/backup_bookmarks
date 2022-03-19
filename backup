@@ -20,7 +20,15 @@ check_mtime() {
  
     if [ $timeDifference -lt $SECONDS_IN_A_DAY ]; then
         copy_bookmarks
+        push_backup
     fi
+}
+
+push_backup() {
+    commitMessage="Bookmarsk backup"
+
+    git add $backupFilePath
+    git commit -m $commitMessage
 }
 
 usage() {
