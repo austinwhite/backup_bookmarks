@@ -20,7 +20,6 @@ check_mtime() {
  
     if [ $timeDifference -lt $SECONDS_IN_A_DAY ]; then
         copy_bookmarks
-        push_backup
     fi
 }
 
@@ -56,4 +55,6 @@ else
     usage
     exit 1
 fi
+
+push_backup
 
