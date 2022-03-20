@@ -27,6 +27,7 @@ pushBackup() {
     commitMessage="Backup: `date "+%b %d, %Y"`"
 
     cd $SUBMODULE
+    git checkout main
     git add $fileName
     git commit -m "$commitMessage"
     git push
