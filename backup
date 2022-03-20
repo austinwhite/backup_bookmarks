@@ -30,6 +30,10 @@ pushBackup() {
     git add $fileName
     git commit -m "$commitMessage"
     git push
+    cd ..
+    git add bookmarks
+    git commit -m "Updated submodule"
+    git push
 }
 
 usage() {
