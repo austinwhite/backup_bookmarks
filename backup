@@ -25,10 +25,11 @@ check_mtime() {
 }
 
 push_backup() {
-    commitMessage="Bookmarks backup"
+    commitMessage="Backup: `date "+%b %d, %Y"`"
 
     git add $backupFilePath
-    git commit -m $commitMessage
+    git commit -m "$commitMessage"
+    git push
 }
 
 usage() {
