@@ -1,12 +1,12 @@
 #!/bin/bash
 
 BOOKMARKS_PATH=~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks
-SUBMODULE_PATH=./bookmarks
+SUBMODULE=bookmarks
 SECONDS_IN_A_DAY=86400
 
 suffix=`date +%m%d%y_%H%M%S`
 fileName=Bookmarks_${suffix}.json
-backupFilePath=$SUBMODULE_PATH/$fileName
+backupFilePath=$SUBMODULE/$fileName
 runType=force
 
 copyBookmarks() {
@@ -26,12 +26,12 @@ checkMtime() {
 pushBackup() {
     commitMessage="Backup: `date "+%b %d, %Y"`"
 
-    cd bookmarks
+    cd $SUBMODULE
     git add $fileName
     git commit -m "$commitMessage"
     git push
     cd ..
-    git add bookmarks
+    git add $SUBMODULE
     git commit -m "Updated submodule"
     git push
 }
