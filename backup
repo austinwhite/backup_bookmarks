@@ -32,7 +32,7 @@ pushBackup() {
     git push
     cd ..
     git add $SUBMODULE
-    git commit -m "Updated submodule"
+    git commit -m "$commitMessage"
     git push
 }
 
