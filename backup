@@ -1,32 +1,33 @@
 #!/bin/bash
 
 BOOKMARKS_PATH=~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks
-BACKUP_ROOT_PATH=./bookmarks/backups
+SUBMODULE_PATH=./bookmarks
 SECONDS_IN_A_DAY=86400
 
 suffix=`date +%m%d%y_%H%M%S`
 fileName=Bookmarks_${suffix}.json
-backupFilePath=$BACKUP_ROOT_PATH/$fileName
+backupFilePath=$SUBMODULE_PATH/$fileName
 runType=force
 
-copy_bookmarks() {
+copyBookmarks() {
     cp $BOOKMARKS_PATH $backupFilePath
 }
 
-check_mtime() {
+checkMtime() {
     bookmarkTime=`stat -c %Y $BOOKMARKS_PATH`
     currentTime=`date +%s`
     timeDifference=`expr $currentTime - $bookmarkTime`
  
     if [ $timeDifference -lt $SECONDS_IN_A_DAY ]; then
-        copy_bookmarks
+        copyBookmarks
     fi
 }
 
-push_backup() {
+pushBackup() {
     commitMessage="Backup: `date "+%b %d, %Y"`"
 
-    git add $backupFilePath
+    cd bookmarks
+    git add $fileName
     git commit -m "$commitMessage"
     git push
 }
@@ -47,14 +48,14 @@ if [ -n "$1" ]; then
 fi
 
 if [ $runType == "force" ]; then
-    copy_bookmarks
+    copyBookmarks
 elif [ $runType == "day" ]; then
-    check_mtime
+    checkMtime
 else
     echo "error: invalid run-type: $runType"
     usage
     exit 1
 fi
 
-push_backup
+pushBackup
 
