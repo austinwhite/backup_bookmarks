@@ -9,6 +9,11 @@ Creates backups of your bookmarks. Supports Debian based linux machines using th
 4. delete the existing submodule entry in the .gitmodules file
 5. add your private bookmarks repos as a submodule: ```git submodule add [private repo url]```
 
+when you clone your repo, you need to re initialize your submodule: <br/>
+```cd bookmarks``` <br/>
+```git submodule init``` <br/>
+```git submodule update``` <br/>
+
 ### automation
 * In order to automate the script, you'll need your git credentials persitently stored. Use your method of coice.<br/>
 * Create a cron job to run the backup script using the frequency of your choice.
