@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 BOOKMARKS_PATH=~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks
 SUBMODULE=bookmarks
