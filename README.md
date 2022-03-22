@@ -14,6 +14,8 @@ when you clone your repo, you need to re initialize your submodule: <br/>
 ```git submodule init``` <br/>
 ```git submodule update``` <br/>
 
+or clone with the ```--recurse``` flag.
+
 ### automation
 * In order to automate the script, you'll need your git credentials persitently stored. Use your method of coice.<br/>
 * Create a cron job to run the backup script using the frequency of your choice.
