@@ -8,7 +8,7 @@ Creates bookmark backups for the 'Brave' web browser.
 3. remove the existing 'bookmarks' submodule
 4. delete the existing submodule entry in the .gitmodules file
 5. add your private bookmarks repos as a submodule: ```git submodule add [private repo url]```
-6. enable submodule recurse in yor git config: ```git config --global submodule.recurse true```
+6. enable submodule recurse in your git config: ```git config --global submodule.recurse true```
 
 Each time you clone your repo you'll need to re-initialize the submodule: <br/>
 ```cd bookmarks``` <br/>
