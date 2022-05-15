@@ -25,5 +25,5 @@ or clone with the ```--recurse``` flag (enabling recurse in your gitconfig doesn
 ```backup [run-type]```
 
 run-type
-* force (default): creates a backup file regardless of last modification date of 'Bookmarks' file
-* day: creates a backup only if 'Bookmarks' has been updated in the last 24 hours
+* force: forces the creates of a bookmark backup 
+* check (default): creates a backup only if 'Bookmarks' has been modified since last backup 

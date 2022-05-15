@@ -7,13 +7,34 @@ SECONDS_IN_A_DAY=86400
 suffix=`date +%m%d%y_%H%M%S`
 fileName=Bookmarks_${suffix}.json
 backupFilePath=$SUBMODULE/$fileName
-runType=force
+md5CheckSum=lastbackup
+runType=check
 
 copyBookmarks() {
     cp $BOOKMARKS_PATH $backupFilePath
 }
 
-checkMtime() {
+validateCheckSum() {
+    if [ -f "$md5CheckSum" ]; then
+        md5sum -c $md5CheckSum
+        if [ $? -ne 0 ]; then
+            md5sum $BOOKMARKS_PATH > $md5CheckSum
+        else
+            return 1
+        fi
+    else
+        md5sum $BOOKMARKS_PATH > $md5CheckSum
+    fi
+
+    return 0
+}
+
+checkLastBackup() {
+    validateCheckSum
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
+
     bookmarkTime=`stat -c %Y $BOOKMARKS_PATH`
     currentTime=`date +%s`
     timeDifference=`expr $currentTime - $bookmarkTime`
@@ -39,7 +60,7 @@ pushBackup() {
 
 usage() {
     echo "usage: backup [run-type]"
-    echo "    run-type: force, day (default: force)"
+    echo "    run-type: force, check (default: check)"
 }
 
 if [ "$#" -gt 1 ]; then
@@ -54,8 +75,8 @@ fi
 
 if [ $runType == "force" ]; then
     copyBookmarks
-elif [ $runType == "day" ]; then
-    checkMtime
+elif [ $runType == "check" ]; then
+    checkLastBackup
 else
     echo "error: invalid run-type: $runType"
     usage
