@@ -41,7 +41,7 @@ setup
 ``````
 
 ### Note
-* In order to automate the script, you'll need your git credentials persitently stored. Use your method of choice.<br/>
+In order to automate the script, you'll need your git credentials persitently stored. Use your method of choice.<br/>
 
 ## Usage
 ### Setup
