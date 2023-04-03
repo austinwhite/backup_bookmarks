@@ -40,9 +40,8 @@ cd ~/.brave-bookmarks
 setup
 ``````
 
-### automation
+### Note
 * In order to automate the script, you'll need your git credentials persitently stored. Use your method of choice.<br/>
-* Create a cron job to run the backup script using the frequency of your choice.
 
 ## Usage
 ### Setup
