@@ -16,10 +16,12 @@ clone the repo to your home directoy with the name ```.brave-bookmarks```
 git clone https://github.com/austinwhite/brave-broswer-backup-bookmarks-file ~/.brave-bookmarks
 ```
 
-Each time you clone your repo you'll need to re-initialize the submodule: <br/>
-```cd bookmarks``` <br/>
-```git submodule init``` <br/>
-```git submodule update``` <br/>
+Each time you clone your repo you'll need to re-initialize the submodule.
+```bash
+cd bookmarks
+git submodule init
+git submodule update
+```
 
 or clone with the ```--recurse``` flag (enabling recurse in your gitconfig doesn't work for cloning).
 
